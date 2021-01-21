@@ -55,34 +55,34 @@ func TestReLoginFailed(t *testing.T) {
 	wrongClient.Password = "wrongpassword"
 	wrongClient.sessionKey = "outdated-session-key"
 
-	_, status, err := wrongClient.Request("/status/code/1")
+	resp, err := wrongClient.Request("/status/code/1")
 	g.Expect(err).NotTo(BeNil())
-	g.Expect(status.ResponseType).To(Equal("Error"))
-	g.Expect(status.Response).To(Equal("re-login failed"))
+	g.Expect(resp.Status.ResponseType).To(Equal("Error"))
+	g.Expect(resp.Status.Response).To(Equal("re-login failed"))
 }
 
 func TestInvalidURL(t *testing.T) {
 	g := NewGomegaWithT(t)
-	_, status, err := client.Request("/trololol")
+	resp, err := client.Request("/trololol")
 
 	g.Expect(err).NotTo(BeNil())
-	g.Expect(status.ResponseType).To(Equal("Error"))
-	g.Expect(status.Response).To(Equal("request failed"))
+	g.Expect(resp.Status.ResponseType).To(Equal("Error"))
+	g.Expect(resp.Status.Response).To(Equal("request failed"))
 }
 
 func TestInvalidXML(t *testing.T) {
 	g := NewGomegaWithT(t)
-	_, status, err := client.Request("/invalid/xml")
+	resp, err := client.Request("/invalid/xml")
 
 	g.Expect(err).NotTo(BeNil())
-	g.Expect(status.ResponseType).To(Equal("Error"))
-	g.Expect(status.Response).To(Equal("corrupted response"))
+	g.Expect(resp.Status.ResponseType).To(Equal("Error"))
+	g.Expect(resp.Status.Response).To(Equal("corrupted response"))
 }
 
 func TestStatusCodeNotZero(t *testing.T) {
 	g := NewGomegaWithT(t)
-	_, status, err := client.Request("/status/code/1")
+	resp, err := client.Request("/status/code/1")
 
 	g.Expect(err).NotTo(BeNil())
-	g.Expect(status.ResponseTypeNumeric).To(Equal(1))
+	g.Expect(resp.Status.ResponseTypeNumeric).To(Equal(1))
 }

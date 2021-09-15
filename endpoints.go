@@ -54,7 +54,7 @@ func (client *Client) CreateHost(name, iqn string) (*Response, *ResponseStatus, 
 
 // MapVolume : map a volume to host + LUN
 func (client *Client) MapVolume(name, host, access string, lun int) (*Response, *ResponseStatus, error) {
-	return client.FormattedRequest("/map/volume/access/%s/lun/%d/host/%s/\"%s\"", access, lun, host, name)
+	return client.FormattedRequest("/map/volume/access/%s/lun/%d/initiator/%s/\"%s\"", access, lun, host, name)
 }
 
 // ShowVolumes : get informations about volumes

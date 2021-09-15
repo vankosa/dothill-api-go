@@ -68,7 +68,7 @@ func (client *Client) UnmapVolume(name, host string) (*Response, *ResponseStatus
 		return client.FormattedRequest("/unmap/volume/\"%s\"", name)
 	}
 
-	return client.FormattedRequest("/unmap/volume/host/\"%s\"/\"%s\"", host, name)
+	return client.FormattedRequest("/unmap/volume/initiator/\"%s\"/\"%s\"", host, name)
 }
 
 // ExpandVolume : extend a volume if there is enough space on the vdisk

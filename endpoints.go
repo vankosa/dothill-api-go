@@ -49,7 +49,7 @@ func (client *Client) CreateVolume(name, size, pool string) (*Response, *Respons
 
 // CreateHost : creates a host
 func (client *Client) CreateHost(name, iqn string) (*Response, *ResponseStatus, error) {
-	return client.FormattedRequest("/create/host/id/\"%s\"/\"%s\"", iqn, name)
+	return client.FormattedRequest("/create/host/initiators/\"%s\"/\"%s\"", iqn, name)
 }
 
 // MapVolume : map a volume to host + LUN

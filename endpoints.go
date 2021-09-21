@@ -90,21 +90,21 @@ func (client *Client) DeleteHost(name string) (*Response, *ResponseStatus, error
 // If host is an empty string, mapping for all hosts is shown
 func (client *Client) ShowHostMaps(host string) ([]Volume, *ResponseStatus, error) {
 	if len(host) > 0 {
-		host = fmt.Sprintf("\"%s\"", host)
+		host = fmt.Sprintf(`\"^.*:%s\.\*\"`, host)
 	}
-	res, status, err := client.FormattedRequest("/show/provisioning/%s", host)
+	res, status, err := client.FormattedRequest("/show/maps/%s", host)
 	if err != nil {
 		return nil, status, err
 	}
 
 	mappings := make([]Volume, 0)
 	for _, rootObj := range res.Objects {
-		if rootObj.Name != "provisioning" {
+		if rootObj.Name != "host-view" {
 			continue
 		}
 
 		for _, object := range rootObj.Objects {
-			if object.Name == "host-view" {
+			if object.Name == "volume-view" {
 				vol := Volume{}
 				vol.fillFromObject(&object)
 				mappings = append(mappings, vol)

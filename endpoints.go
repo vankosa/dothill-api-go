@@ -104,7 +104,7 @@ func (client *Client) ShowHostMaps(host string) ([]Volume, *ResponseStatus, erro
 		}
 
 		for _, object := range rootObj.Objects {
-			if object.Name == "volume-view" {
+			if object.Name == "host-view" {
 				vol := Volume{}
 				vol.fillFromObject(&object)
 				mappings = append(mappings, vol)

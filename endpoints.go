@@ -92,7 +92,7 @@ func (client *Client) ShowHostMaps(host string) ([]Volume, *ResponseStatus, erro
 	if len(host) > 0 {
 		host = fmt.Sprintf("\"%s\"", host)
 	}
-	res, status, err := client.FormattedRequest("/show/initiators/%s", host)
+	res, status, err := client.FormattedRequest("/show/maps/%s", host)
 	if err != nil {
 		return nil, status, err
 	}

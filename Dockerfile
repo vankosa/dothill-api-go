@@ -29,6 +29,6 @@ RUN go mod download
 
 COPY . .
 
-RUN go build -v cmd/mock/mock.go
+#RUN go build -v cmd/mock/mock.go
 
 CMD [ "go", "test", "-v" ]

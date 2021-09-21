@@ -90,9 +90,13 @@ func (client *Client) DeleteHost(name string) (*Response, *ResponseStatus, error
 // If host is an empty string, mapping for all hosts is shown
 func (client *Client) ShowHostMaps(host string) ([]Volume, *ResponseStatus, error) {
 	if len(host) > 0 {
-		host = fmt.Sprintf(`\"^.*:%s\.\*\"`, host)
+		host = fmt.Sprintf("\"%s\"", host)
 	}
-	res, status, err := client.FormattedRequest("/show/maps/%s", host)
+
+	smallhost := strings.Split(host, ":")
+	hostids := fmt.Sprintf(smallhost[1] + ".*")
+
+	res, status, err := client.FormattedRequest("/show/maps/%s", hostids)
 	if err != nil {
 		return nil, status, err
 	}

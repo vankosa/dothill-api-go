@@ -95,8 +95,9 @@ func (client *Client) ShowHostMaps(host string) ([]Volume, *ResponseStatus, erro
 
 	smallhost := strings.Split(host, ":")
 	hostids := fmt.Sprintf(smallhost[1] + ".*")
+	hostname := fmt.Sprintf("\"%s\"", hostids)
 
-	res, status, err := client.FormattedRequest("/show/maps/%s", hostids)
+	res, status, err := client.FormattedRequest("/show/maps/%s", hostname)
 	if err != nil {
 		return nil, status, err
 	}

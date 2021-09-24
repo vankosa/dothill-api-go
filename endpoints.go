@@ -104,7 +104,7 @@ func (client *Client) ShowHostMaps(host string) ([]Volume, *ResponseStatus, erro
 
 	mappings := make([]Volume, 0)
 	for _, rootObj := range res.Objects {
-		if rootObj.Name != "host-view" {
+		if rootObj.Name != "hosts-view" {
 			continue
 		}
 
